@@ -1,4 +1,4 @@
-var dataArray = [5, 20, 15, 40, 50, 2, 35]
+var dataArray = [5, 20, 15, 40, 50, 2, 35, 80, 112, 15, 12, 7]
 
 var height = 500;
 var width = 500;
@@ -27,14 +27,15 @@ var canvas = d3.select("body")
                		.append("g")
                		.attr("transform", "translate(20,20)");
 
+var heightScaleFactor = 0.8*height/dataArray.length;
 var bars = canvas.selectAll("rect")
 				 .data(dataArray)
 				 .enter()
 				 	.append("rect")
 				 	.attr("width", function(d) {return widthScale(d);})
-				 	.attr("height", 50)
+				 	.attr("height", heightScaleFactor)
 				 	.attr("fill", function(d) {return colorScale(d);})
-				 	.attr("y", function(d, i){return 60*i;});
+				 	.attr("y", function(d, i){return heightScaleFactor*1.12*i;});
 canvas.append("g")
 	  .attr("transform","translate(0,460)")
 	  .call(axis);
