@@ -1,6 +1,11 @@
 var barFunc = function() {
 	// just an array/list of data to display.
-	var dataArray = [5, 20, 15, 40, 50, 2, 35, 80, 112, 15, 12, 7]
+	var arraySize = Math.floor((Math.random() * 15) + 3);
+	
+	var dataArray = [];
+	for (var i=0; i< arraySize; i++ ){
+		dataArray.push(Math.floor((Math.random() * 100) + 1))
+	}	 
 
 	//canvas size
 	var height = 500;
@@ -48,5 +53,5 @@ var barFunc = function() {
 	// putting the axis in
 	canvas.append("g")
 		  .attr("transform","translate(0,"+ height*0.9+")")
-		  .call(axis);
+		  .call(axis);	
 }
