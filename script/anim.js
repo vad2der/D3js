@@ -40,5 +40,4 @@ var animFunc = function(){
 	  			.attr("fill", "grey")
 	  			.attr("cy", 50)
 	  			.each("end", function() {d3.select(this).attr("fill", "pink")});
-
 }

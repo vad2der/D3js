@@ -4,9 +4,9 @@ var barFunc = function() {
 	
 	var dataArray = [];
 	for (var i=0; i< arraySize; i++ ){
-		dataArray.push(Math.floor((Math.random() * 100) + 1))
+		dataArray.push({"NAME": "Parameter: "+i ,"VALUE": Math.floor((Math.random() * 100) + 1)})
 	}	 
-
+	
 	//canvas size
 	var height = 500;
 	var width = 500;
@@ -14,8 +14,29 @@ var barFunc = function() {
 	// clear previous d3 instances
 	d3.select("svg").remove();
 
+	// couple helpers
+	var getValues = function(AR){
+		var outputAr = []
+		for (var i = 0; i < AR.length; i++) {
+			outputAr.push(AR[i].VALUE);
+		}
+		return outputAr;
+	}
+
+	var getNames = function(AR){
+		var outputAr = []
+		for (var i = 0; i < AR.length; i++) {
+			outputAr.push(AR[i].NAME);
+		}
+		return outputAr;
+	}
+
+	//separate the array
+	var valuesArray = getValues(dataArray);
+	var nameArray = getNames(dataArray);
+
 	// scale up to full width of the canvas
-	var maxWidth = Math.max(...dataArray);
+	var maxWidth = Math.max(...valuesArray);
 	var widthScale = d3.scale.linear()
 							 .domain([0, maxWidth])
 							 .range([0, width]);
@@ -23,7 +44,7 @@ var barFunc = function() {
 	// color scale range
 	var colorScale = d3.scale.linear()
 	                         .domain([0, maxWidth])
-	                         .range(["blue","red"]);
+	                         .range(["green","red"]);
 
 	// axis instance and properties
 	var axis = d3.svg.axis()
@@ -42,16 +63,26 @@ var barFunc = function() {
 
 	// bars to show from data
 	var bars = canvas.selectAll("rect")
-					 .data(dataArray)
+					 .data(valuesArray)
 					 .enter()
 					 	.append("rect")
 					 	.attr("width", function(d) {return widthScale(d);})
 					 	.attr("height", heightScaleFactor)
 					 	.attr("fill", function(d) {return colorScale(d);})
 					 	.attr("y", function(d, i){return heightScaleFactor*1.12*i;});
+	// labels for bars
+	var labels = canvas.selectAll("text")
+					   .data(nameArray)
+					   .enter()
+					   .append("text")
+					   .attr("fill", "black")
+					   .attr("x", 5)
+					   .attr("y", function(n, i){return heightScaleFactor*1.13*i+heightScaleFactor/2})
+					   .text(function(n){return n;})
+
 
 	// putting the axis in
 	canvas.append("g")
 		  .attr("transform","translate(0,"+ height*0.9+")")
-		  .call(axis);	
+		  .call(axis);
 }
