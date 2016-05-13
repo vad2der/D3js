@@ -3,15 +3,19 @@
 	<head>
 		<title>D3JS training</title>
 		<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-		
 	</head>
-
 	<body>
-		<button id="bar" onclick="barFunc()">Show bar demo!</button>
+		<button id="barbutton" onclick="barFunc()">Bar chart demo!</button>
 		<div id="bar_canvas"></div>
-		<button id="anim" onclick="animFunc()">Start the animation demo!</button>
+		<button id="anim" onclick="animFunc()">Animation demo</button>
 		<div id="anim_canvas"></div>
+		<button id="arcbutton" onclick="arcFunc()">Pie Chart demo</button>
+		<div id="arc_canvas"></div>
+		<button id="treebutton" onclick="treeFunc(true)">Horizontal Tree Diagram demo</button><button id="treebutton" onclick="treeFunc(false)">Vertical Tree Diagram demo</button>
+		<div id="tree_canvas"></div>
 	</body>
 	<script src="./script/bars.js"></script>
 	<script src="./script/anim.js"></script>
+	<script src="./script/arc.js"></script>
+	<script src="./script/tree.js"></script>
 </html>
