@@ -18,12 +18,13 @@ var treeFunc = function (view) {
 							[{"name": "Support Department"},
 							{"name": "Development Department"},
 							{"name": "Management Department"}]	
-						}]
+						},
+						{"name": "N Swiss GmbH"}]
 					};
 
 	// canvas size
-	var width = 1000;
-	var height = 1000;
+	var width = 500;
+	var height = 500;
 
 	// radius of a node
 	var r = 5;
@@ -38,8 +39,10 @@ var treeFunc = function (view) {
 	               	.append("g")
 	             	.attr("transform", "translate(70, 70)");
 
-	var tree = d3.layout.tree()
+	var tree = d3.layout.cluster()
 		.size([400,400])
+	// d3.layout.tree() for nodes up view
+	// d3.layout .cluster() for end nodes to leafes view
 
 	var nodes = tree.nodes(jsonData);
 	
