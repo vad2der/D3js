@@ -80,7 +80,13 @@ var arcFunc = function () {
 			.style("opacity", 0.2);
 
 		d3.select(this)
-			.style("opacity", 1);		
+			.style("opacity", 1);
+
+		d3.select(this)
+			.select("text")
+			.transition()
+    		.duration(200)
+			.style("font-size", "20px");
 	};
 
 	function mouseOutBar(){
@@ -88,6 +94,12 @@ var arcFunc = function () {
 			.transition()
     		.duration(400)
 			.style("opacity", 1);
+
+		d3.select(this)
+			.select("text")
+			.transition()
+    		.duration(200)
+			.style("font-size", "");
 	};
 	
 	// get centroid		

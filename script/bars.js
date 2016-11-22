@@ -63,46 +63,69 @@ var barFunc = function() {
 
 	// bars to show from data
 	var bars = canvas.selectAll("rect")
-					 .data(valuesArray)
+					 .data(dataArray)
 					 .enter()
-					 	.append("rect")
-					 	.attr("width", function(d) {return widthScale(d);})
-					 	.attr("height", heightScaleFactor)
-					 	.attr("fill", function(d) {return colorScale(d);})
-					 	.attr("y", function(d, i){return heightScaleFactor*1.12*i;});
+					 	.append("g")
+						.attr("class", "rect");
+					 		
+	bars.append("rect")
+				.attr("width", function(d) {return widthScale(d.VALUE);})
+				.attr("height", heightScaleFactor)
+				.attr("fill", function(d) {return colorScale(d.VALUE);})
+				.attr("y", function(d, i){return heightScaleFactor*1.12*i;});
 					 	
 	bars.on('mouseover', mouseOverBar)
 	 	.on('mouseout', mouseOutBar);
 
-	function mouseOverBar(){		
-		var circleUnderMouse = this
-		d3.selectAll("rect")
+	function mouseOverBar(){				
+		var circleUnderMouse = this;
+		d3.selectAll(".rect")
 			.filter(function(d,i) {
       			return (this !== circleUnderMouse);})
 			.transition()
     		.duration(200)
 			.style("opacity", 0.2);
 
+		d3.select(this).select(".rect")
+			.style("opacity", 1);	
+
 		d3.select(this)
-			.style("opacity", 1);		
+			.select("text")
+			.transition()
+    		.duration(200)
+			.style("font-size", "30px");	
 	};
 
 	function mouseOutBar(){
-		d3.selectAll("rect")
+		d3.selectAll(".rect")
 			.transition()
     		.duration(400)
 			.style("opacity", 1);
+
+		d3.select(this)
+			.select("text")
+			.transition()
+    		.duration(200)
+			.style("font-size", "15px");
 	};
 
-	// labels for bars
-	var labels = canvas.selectAll("text")
-					   .data(nameArray)
-					   .enter()
-					   .append("text")
-					   .attr("fill", "black")
-					   .attr("x", 5)
-					   .attr("y", function(n, i){return heightScaleFactor*1.13*i+heightScaleFactor/2})
-					   .text(function(n){return n;})
+	var arc = d3.svg.arc();
+	// get centroid		
+	d3.selectAll(".rect").append("text")
+		.attr("x", "10")
+		.attr("y", function(d, i){return heightScaleFactor*1.12*i+heightScaleFactor/1.9;})
+		.text(function(d){return d.NAME;})
+		.style("font-size", "20px");
+
+	// labels for bars - poor implementation
+	// var labels = canvas.selectAll("text")
+	// 				   .data(nameArray)
+	// 				   .enter()
+	// 				   .append("text")
+	// 				   .attr("fill", "black")
+	// 				   .attr("x", 5)
+	// 				   .attr("y", function(n, i){return heightScaleFactor*1.13*i+heightScaleFactor/2})
+	// 				   .text(function(n){return n;})
 
 
 	// putting the axis in

@@ -24,6 +24,10 @@ body div button {
   border: 0;
 }
 
+text {
+  font-size: 10px;
+}
+
 #logo-img {
   background: url('../images/restaurant-logo_large.png') no-repeat;
   width: 150px;
