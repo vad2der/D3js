@@ -2,7 +2,7 @@ var treeFunc = function (view) {
 
 
 	// clear previous d3 instances
-	d3.select("svg").remove();
+	d3.selectAll("svg").remove();
 
 	// data json example. Modern browser does not allow to call a file on the host
 	var jsonData = {"name": "Company N",

@@ -3,7 +3,7 @@ var circlesAnim = function(){
 	var width = function(){return document.getElementById("canvas").clientWidth;};
 	if (height() == 0 || width() == 0){return};
 	// clear previous d3 instances
-	d3.select("svg").remove();
+	d3.selectAll("svg").remove();
 		// canvas size
 	
 	var coords = [];

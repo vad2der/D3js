@@ -3,7 +3,7 @@ var cubesAnim = function(){
 	var width = function(){return document.getElementById("canvas").clientWidth;};
 	if (height() == 0 || width() == 0){return};
 	// clear previous d3 instances
-	d3.select("svg").remove();
+	d3.selectAll("svg").remove();
 		// canvas size
 	
 	var coords = [];
@@ -82,5 +82,3 @@ var cubesAnim = function(){
                  	.duration(2000)
                  	.attr("opacity", 1);
 };
-
-$( window ).resize(function() {cubesAnim()});

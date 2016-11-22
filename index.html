@@ -10,14 +10,15 @@
 	<body>
 		<div class=row>
 			<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-				<button class="btn btn-default" id="barbutton" onclick="barFunc()">Bar chart demo</button>				
-				<button class="btn btn-default" id="arcbutton" onclick="arcFunc()">Pie Chart demo</button>
-				<button class="btn btn-default" id="treebutton" onclick="treeFunc(false)">Horizontal Tree Diagram demo</button>
-				<button class="btn btn-default" id="treebutton" onclick="treeFunc(true)">Vertical Tree Diagram demo</button>
-				<button class="btn btn-default" id="bubblebutton" onclick="bubbleFunc(false)">Bubble Diagram demo</button>
-				<button class="btn btn-default" id="anim" onclick="animFunc()">Animation demo</button>
-				<button class="btn btn-default" id="anim" onclick="cubesAnim()">Mouse Event & Animation</button>
-				<button class="btn btn-default" id="anim" onclick="circlesAnim()">Mouse Event & neighbouring objects triggering</button>
+				<button class="btn btn-default" onclick="barFunc()">Bar chart demo</button>				
+				<button class="btn btn-default" onclick="arcFunc()">Pie Chart demo</button>
+				<button class="btn btn-default" onclick="interactiveDiagram()">Interactive Pie Chart</button>
+				<button class="btn btn-default" onclick="treeFunc(false)">Horizontal Tree Diagram demo</button>
+				<button class="btn btn-default" onclick="treeFunc(true)">Vertical Tree Diagram demo</button>
+				<button class="btn btn-default" onclick="bubbleFunc(false)">Bubble Diagram demo</button>
+				<button class="btn btn-default" onclick="animFunc()">Animation demo</button>
+				<button class="btn btn-default" onclick="cubesAnim()">Mouse Event & Animation</button>
+				<button class="btn btn-default" onclick="circlesAnim()">Mouse Event & neighbouring objects triggering</button>
 			</div>
 			<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
 				<div id="canvas"></div>				
@@ -34,5 +35,6 @@
 		<script src="./script/bubble.js"></script>
 		<script src="./script/cubesAnim.js"></script>
 		<script src="./script/circlesAnim.js"></script>
+		<script src="./script/interactiveDiagram.js"></script>
 	</body>	
 </html>

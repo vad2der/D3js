@@ -27,7 +27,7 @@ var arcFunc = function () {
 	var namesArray = getNames(dataArray);
 
 	// clear previous d3 instances
-	d3.select("svg").remove();
+	d3.selectAll("svg").remove();
 
 	// canvas size
 	var height = 500;
@@ -66,6 +66,29 @@ var arcFunc = function () {
 	arcs.append("path")
 		.attr("d", arc)
 		.attr("fill", function(d){return colorScale(d.data)});
+
+	arcs.on('mouseover', mouseOverBar)
+	 	.on('mouseout', mouseOutBar);
+
+	function mouseOverBar(){		
+		var circleUnderMouse = this
+		d3.selectAll('.arc')
+			.filter(function(d,i) {
+      			return (this !== circleUnderMouse);})
+			.transition()
+    		.duration(200)
+			.style("opacity", 0.2);
+
+		d3.select(this)
+			.style("opacity", 1);		
+	};
+
+	function mouseOutBar(){
+		d3.selectAll('.arc')
+			.transition()
+    		.duration(400)
+			.style("opacity", 1);
+	};
 	
 	// get centroid		
 	arcs.append("text")

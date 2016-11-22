@@ -3,7 +3,7 @@ var animFunc = function(){
 	var data = ["one"];
 
 	// clear previous d3 instances
-	d3.select("svg").remove();
+	d3.selectAll("svg").remove();
 
 	// canvas size
 	var width = 500;

@@ -12,7 +12,7 @@ var barFunc = function() {
 	var width = 500;
 
 	// clear previous d3 instances
-	d3.select("svg").remove();
+	d3.selectAll("svg").remove();
 
 	// couple helpers
 	var getValues = function(AR){
@@ -70,6 +70,30 @@ var barFunc = function() {
 					 	.attr("height", heightScaleFactor)
 					 	.attr("fill", function(d) {return colorScale(d);})
 					 	.attr("y", function(d, i){return heightScaleFactor*1.12*i;});
+					 	
+	bars.on('mouseover', mouseOverBar)
+	 	.on('mouseout', mouseOutBar);
+
+	function mouseOverBar(){		
+		var circleUnderMouse = this
+		d3.selectAll("rect")
+			.filter(function(d,i) {
+      			return (this !== circleUnderMouse);})
+			.transition()
+    		.duration(200)
+			.style("opacity", 0.2);
+
+		d3.select(this)
+			.style("opacity", 1);		
+	};
+
+	function mouseOutBar(){
+		d3.selectAll("rect")
+			.transition()
+    		.duration(400)
+			.style("opacity", 1);
+	};
+
 	// labels for bars
 	var labels = canvas.selectAll("text")
 					   .data(nameArray)
