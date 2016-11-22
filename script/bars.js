@@ -51,7 +51,7 @@ var barFunc = function() {
 					 .ticks(5)
 					 .scale(widthScale);
 
-	var canvas = d3.select("#bar_canvas")
+	var canvas = d3.select("#canvas")
 	  			   .append("svg")
 	               .attr("width", width)
 	               .attr("height", height)

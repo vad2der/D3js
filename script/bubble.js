@@ -25,7 +25,7 @@ var bubbleFunc = function (view) {
 	var height = 600;
 	
 	// canvas
-	var canvas = d3.select("#bubble_canvas")
+	var canvas = d3.select("#canvas")
 	  			   .append("svg")
 	               .attr("width", width)
 	               .attr("height", height)

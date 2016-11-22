@@ -32,7 +32,7 @@ var treeFunc = function (view) {
 	var horView = view;
 
 	// canvas
-	var canvas = d3.select("#tree_canvas")
+	var canvas = d3.select("#canvas")
 	  			   .append("svg")
 	               .attr("width", width)
 	               .attr("height", height)

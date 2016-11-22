@@ -10,7 +10,7 @@ var animFunc = function(){
 	var height = 500;
 	
 	// canvas for playing
-	var canvas = d3.select("#anim_canvas")
+	var canvas = d3.select("#canvas")
 			   .append("svg")
 			   .attr("width", width)
 			   .attr("height", height);

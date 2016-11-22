@@ -34,7 +34,7 @@ var arcFunc = function () {
 	var width = 500;
 
 	// canvas
-	var canvas = d3.select("#arc_canvas")
+	var canvas = d3.select("#canvas")
 	  			   .append("svg")
 	               .attr("width", width)
 	               .attr("height", height);
