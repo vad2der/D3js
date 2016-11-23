@@ -55,9 +55,9 @@ var circlesAnim = function(){
 
     function handleMouseOut(d,i){
     	d3.select(this).transition()
-    		.duration(500)
+    		.duration(300)
     		.attr("r", radius)
-    		.attr("opacity", .2);    		
+    		.attr("opacity", 1);    		
     };
 
     function handleMouseMove(){
@@ -68,7 +68,7 @@ var circlesAnim = function(){
 	    var vicinity;	
         circles.each(function(d) {
             var dist = Math.sqrt(Math.pow(d[0] - x, 2) + Math.pow(d[1] - y, 2));
-            if (dist < radius*1.1 && dist > radius*1 ) {
+            if (dist < radius*3 && dist > radius*1.2 ) {
                 vicinity = this;
             }
             d3.select(vicinity)
@@ -82,7 +82,7 @@ var circlesAnim = function(){
                     .transition()
                     .duration(300)
                     .style({"fill": "grey"})
-                    .attr("opacity", 0)
+                    .attr("opacity", 1)
                     .attr("vicinity", false);   
     };
   };
