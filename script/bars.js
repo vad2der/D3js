@@ -110,13 +110,7 @@ var barFunc = function() {
 	};
 
 	var arc = d3.svg.arc();
-	// get centroid		
-	d3.selectAll(".rect").append("text")
-		.attr("x", "10")
-		.attr("y", function(d, i){return heightScaleFactor*1.12*i+heightScaleFactor/1.9;})
-		.text(function(d){return d.NAME;})
-		.style("font-size", "20px");
-
+	
 	// labels for bars - poor implementation
 	// var labels = canvas.selectAll("text")
 	// 				   .data(nameArray)
@@ -127,6 +121,12 @@ var barFunc = function() {
 	// 				   .attr("y", function(n, i){return heightScaleFactor*1.13*i+heightScaleFactor/2})
 	// 				   .text(function(n){return n;})
 
+	// labels for bars - proper one
+	d3.selectAll(".rect").append("text")
+		.attr("x", "10")
+		.attr("y", function(d, i){return heightScaleFactor*1.12*i+heightScaleFactor/1.9;})
+		.text(function(d){return d.NAME;})
+		.style("font-size", "20px");
 
 	// putting the axis in
 	canvas.append("g")

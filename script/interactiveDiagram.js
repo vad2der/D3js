@@ -96,35 +96,55 @@ const burst_group = d3.select('#canvas')
       .attr('transform', `translate(${width / 2},${height / 2})`)
 
 // Append Arcs
-const arcs = burst_group.selectAll('path.ark')
-    .data(nodes)
-    .enter().append('path')
-    .attr({d: arc_generator,
-          class: d => `ark -depth-${d.depth}`})
-    .style('fill', (d, i) => d.depth > 0 ? color(i) : null)
-    .on('click', click)
-    .on('mouseover', (d) => {if (d.depth > 0) {
+const arcs_g = burst_group.selectAll('path.ark')
+                          .data(nodes)
+                          .enter()
+                          .append("g")
+                          .attr("class", "arc")
+                          .on('mouseover', hoverOver)
+                          .on('mouseout', hoverOut);
+
+const arcs = arcs_g.append('path')
+                  .attr({d: arc_generator,
+                    class: d => `ark -depth-${d.depth}`})
+                  .style('fill', (d, i) => d.depth > 0 ? color(i) : null)
+                  .on('click', click);
+
+var arc = d3.svg.arc()
+          .innerRadius(radius-100)            
+          .outerRadius(radius)
+
+function hoverOver(d,i){  
+  if (d.depth > 0) {
         fade(arcs, 0.1, getNameArray(d).reverse()[getNameArray(d).length-1].toString(), 'name');
-        update_crumbs(d);};})
-    .on('mouseout', (d) => {
-      fade(arcs, 1);
-      remove_crumbs();
-    });
+        update_crumbs(d);
+  }
+  d3.select(this).append("text")
+    //.attr("transform", function(d){return "translate("+arc.centroid(d)+")";})
+    .attr("text-anchor", "middle")
+    .text(function(d){return d.name+": "+d.value;})
+    .style("font-size", "15px");
+};
+
+function hoverOut(d,i){
+  fade(arcs, 1);
+  remove_crumbs()
+  d3.select(this).selectAll("text").remove();
+}
 
 // Add legend
 function addLegend() {
   // Dimensions of legend item: width, height, spacing, radius of rounded rect.
   var line = { width: 500, height: 30, spacing: 1, radius: 5 };
   var legend_canvas = d3.select('#canvas')
-                .append('svg:svg')
-                .attr('width', line.width)
-                .attr('height', color.domain().length * (line.height + line.spacing));
+                .append('ul')                
   
-  var legend = legend_canvas.selectAll('g')
+  var legend = legend_canvas.selectAll('ul')                
                 .data(color.domain())
                 .enter()
-                  .append('svg:g')
-                  .attr('transform', (d, i) => `translate(0,${i * (line.height + line.spacing)})`);
+                  .append("li")
+                    .append('svg')
+                    .attr('transform', (d, i) => `translate(0,${i * (line.height + line.spacing)})`);
   
   legend.append('svg:rect')
     .attr('width', 12)

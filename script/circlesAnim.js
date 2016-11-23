@@ -78,4 +78,3 @@ var circlesAnim = function(){
 	};		
   };
 
-$( window ).resize(function() {cubesAnim()});

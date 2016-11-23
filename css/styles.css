@@ -13,6 +13,14 @@ body div button {
   width: 100%;
 }
 
+ul {
+  list-style-type: none;
+}
+
+ul > li > svg {
+  height: 1em;
+}
+
 #canvas {
   width: 500px;
   height: 500px;
