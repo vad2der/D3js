@@ -55,9 +55,9 @@ var circlesAnim = function(){
 
     function handleMouseOut(d,i){
     	d3.select(this).transition()
-    		.duration(500)
+    		.duration(300)
     		.attr("r", radius)
-    		.attr("opacity", .2);    		
+    		.attr("opacity", 1);    		
     };
 
     function handleMouseMove(){
@@ -65,16 +65,25 @@ var circlesAnim = function(){
 		coordinates = d3.mouse(this);
 		var x = coordinates[0];
 		var y = coordinates[1];
-		// console.log(x,y);
-		// console.log(this);
-		
-
-		// if (Math.pow((Math.pow((x-this.attributes[1].value),2)+Math.pow((y-this.attributes[0].value),2)),.5)<40 &&
-		// 	Math.pow((Math.pow((x-this.attributes[1].value),2)+Math.pow((y-this.attributes[0].value),2)),.5)>13){
-		// 	return 0.5;
-		// }else if (Math.pow((Math.pow((x-this.attributes[1].value),2)+Math.pow((y-this.attributes[0].value),2)),.5)>=40){
-		// 	return 0.1;
-		// }
-	};		
+	    var vicinity;	
+        circles.each(function(d) {
+            var dist = Math.sqrt(Math.pow(d[0] - x, 2) + Math.pow(d[1] - y, 2));
+            if (dist < radius*3 && dist > radius*1.2 ) {
+                vicinity = this;
+            }
+            d3.select(vicinity)
+                .attr("vicinity", true);   
+        });
+        d3.selectAll('[vicinity="true"]')
+                .transition()
+                .duration(80)
+                .style({"fill": "yellow"})
+                .attr("opacity", .3)
+                    .transition()
+                    .duration(300)
+                    .style({"fill": "grey"})
+                    .attr("opacity", 1)
+                    .attr("vicinity", false);   
+    };
   };
 
