@@ -79,7 +79,7 @@ let arc_transition; // save arc transition
 // Create scales
 const x = d3.scale.linear().range([0, 2 * Math.PI]);
 const y = d3.scale.sqrt().range([0, width / 2]);
-const color = d3.scale.category20c();
+const color = d3.scale.category20b();
 
 // Arc generator
 const arc_generator = d3.svg.arc()
@@ -107,7 +107,7 @@ const arcs_g = burst_group.selectAll('path.ark')
 const arcs = arcs_g.append('path')
                   .attr({d: arc_generator,
                     class: d => `ark -depth-${d.depth}`})
-                  .style('fill', (d, i) => d.depth > 0 ? color(i) : null)
+                  .style('fill', (d, i) => d.depth > 0 ? color(i) : "white")
                   .on('click', click);
 
 var arc = d3.svg.arc()
@@ -179,8 +179,8 @@ function update_crumbs(d) {
   // Append new crumbs
   sections.reverse().forEach((name) => {
     crumb_container.append('span')
-      .classed('crumb', true)
-      .text(" > "+name);
+                  .classed('crumb', true)
+                .text(" > "+name);
   });
 };
 // Removes all crumb spans
@@ -190,8 +190,8 @@ function remove_crumbs() {
 // Handle Clicks
 function click(d) {
   arc_transition = arcs.transition('arc_tween')
-    .duration(750)
-    .attrTween('d', arcTween(d));
+                      .duration(750)
+                      .attrTween('d', arcTween(d));
 };
 
 // Interpolate the scales!
